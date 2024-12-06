@@ -1,0 +1,25 @@
+title: Suspicious PowerShell Activity
+id: 12345678-90ab-cdef-1234-567890abcdef
+status: experimental
+description: Detects suspicious PowerShell activity that may indicate malicious behavior.
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+author: Your Name
+date: 2024-12-06
+tags:
+  - attack.execution
+  - attack.t1059.001
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4104
+    ScriptBlockText|contains:
+      - "Invoke-Mimikatz"
+      - "Invoke-Expression"
+      - "IEX"
+  condition: selection
+falsepositives:
+  - Legitimate administrative scripts
+level: high
